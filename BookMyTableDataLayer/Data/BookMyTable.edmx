@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bookmytableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="250" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="250" />
+          <Property Name="EmailID" Type="varchar" MaxLength="250" />
+          <Property Name="City" Type="varchar" MaxLength="250" />
+          <Property Name="Country" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelName" Type="varchar" MaxLength="550" />
+          <Property Name="ContactPersoneName" Type="varchar" MaxLength="350" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="City" Type="varchar" MaxLength="150" />
+          <Property Name="Country" Type="varchar" MaxLength="150" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="250" />
+          <Property Name="EmailID" Type="varchar" MaxLength="250" />
+          <Property Name="OpenintHours" Type="varchar" MaxLength="250" />
+          <Property Name="HotelType" Type="varchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelDiningDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="TotalTable" Type="int" />
+          <Property Name="TableCapacity" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TableAvailable" Type="int" />
+        </EntityType>
+        <EntityType Name="HotelMenuTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="DishName" Type="varchar" MaxLength="150" />
+          <Property Name="DishDescription" Type="varchar" MaxLength="250" />
+          <Property Name="Isveg" Type="int" />
+          <Property Name="IsAvaulable" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuDishTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="DishName" Type="varchar" MaxLength="150" />
+          <Property Name="DishDescription" Type="varchar" MaxLength="250" />
+          <Property Name="Isveg" Type="int" />
+          <Property Name="IsAvailable" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderMenuEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="DishId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="DishName" Type="varchar" MaxLength="250" />
+          <Property Name="DishAmount" Type="money" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderPaymentDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustOrderId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="PaymentTypeID" Type="int" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salesOrderItemTable">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="TableId" Type="int" />
+          <Property Name="TotalQuantity" Type="int" />
+          <Property Name="IsApproveStatus" Type="int" />
+          <Property Name="ApprovalName" Type="varchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salesOrderTable">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" />
+          <Property Name="TableId" Type="int" />
+          <Property Name="TotalQuantity" Type="int" />
+          <Property Name="IsApproveStatus" Type="int" />
+          <Property Name="ApprovalName" Type="varchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__HotelDini__Hotel__76969D2E">
+          <End Role="HotelDetails" Type="Self.HotelDetails" Multiplicity="0..1" />
+          <End Role="HotelDiningDetails" Type="Self.HotelDiningDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HotelDiningDetails">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuDishT__Hotel__787EE5A0">
+          <End Role="HotelDetails" Type="Self.HotelDetails" Multiplicity="0..1" />
+          <End Role="MenuDishTable" Type="Self.MenuDishTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuDishTable">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderPaym__Custo__440B1D61">
+          <End Role="CustomerTable" Type="Self.CustomerTable" Multiplicity="0..1" />
+          <End Role="OrderPaymentDetails" Type="Self.OrderPaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPaymentDetails">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__salesOrde__Order__7F2BE32F">
+          <End Role="salesOrderTable" Type="Self.salesOrderTable" Multiplicity="1" />
+          <End Role="salesOrderItemTable" Type="Self.salesOrderItemTable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="salesOrderTable">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="salesOrderItemTable">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddBookMyTableAndMenuOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_intHotelId" Type="int" Mode="In" />
+          <Parameter Name="P_intTableBookingID" Type="int" Mode="In" />
+          <Parameter Name="P_intTotalQuantity" Type="int" Mode="In" />
+          <Parameter Name="P_dcmlTotalAmt" Type="decimal" Mode="In" />
+          <Parameter Name="p_vchApprovalName" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchCustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchPhoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchEmailID" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchCity" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchCountry" Type="varchar" Mode="In" />
+          <Parameter Name="p_vchAddress" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddsalesOrderItemTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_intHotelId" Type="int" Mode="In" />
+          <Parameter Name="p_intMenuID" Type="int" Mode="In" />
+          <Parameter Name="P_intTableId" Type="int" Mode="In" />
+          <Parameter Name="P_dcmlTotalAmt" Type="decimal" Mode="In" />
+          <Parameter Name="p_OrderId" Type="int" Mode="In" />
+          <Parameter Name="P_intQuantity" Type="int" Mode="In" />
+          <Parameter Name="p_vchDishName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pSp_GetHotelDiningDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HotelId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pSp_GetHotelMEnuDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HotelId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pSp_GetRestaurantsDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Vch_IsActive" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetOrderDetailsToEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeID" Type="int" Mode="In" />
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetUserAndUserRoleDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="bookmytableModelStoreContainer">
+          <EntitySet Name="CustomerTable" EntityType="Self.CustomerTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelDetails" EntityType="Self.HotelDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelDiningDetails" EntityType="Self.HotelDiningDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelMenuTable" EntityType="Self.HotelMenuTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuDishTable" EntityType="Self.MenuDishTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMenuEntity" EntityType="Self.OrderMenuEntity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderPaymentDetails" EntityType="Self.OrderPaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salesOrderItemTable" EntityType="Self.salesOrderItemTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salesOrderTable" EntityType="Self.salesOrderTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__HotelDini__Hotel__76969D2E" Association="Self.FK__HotelDini__Hotel__76969D2E">
+            <End Role="HotelDetails" EntitySet="HotelDetails" />
+            <End Role="HotelDiningDetails" EntitySet="HotelDiningDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuDishT__Hotel__787EE5A0" Association="Self.FK__MenuDishT__Hotel__787EE5A0">
+            <End Role="HotelDetails" EntitySet="HotelDetails" />
+            <End Role="MenuDishTable" EntitySet="MenuDishTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderPaym__Custo__440B1D61" Association="Self.FK__OrderPaym__Custo__440B1D61">
+            <End Role="CustomerTable" EntitySet="CustomerTable" />
+            <End Role="OrderPaymentDetails" EntitySet="OrderPaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__salesOrde__Order__7F2BE32F" Association="Self.FK__salesOrde__Order__7F2BE32F">
+            <End Role="salesOrderTable" EntitySet="salesOrderTable" />
+            <End Role="salesOrderItemTable" EntitySet="salesOrderItemTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bookmytableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HotelDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelName" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersoneName" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OpenintHours" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="HotelType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ts" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="HotelDiningDetails" Relationship="Self.FK__HotelDini__Hotel__76969D2E" FromRole="HotelDetails" ToRole="HotelDiningDetails" />
+          <NavigationProperty Name="MenuDishTables" Relationship="bookmytableModel.FK__MenuDishT__Hotel__787EE5A0" FromRole="HotelDetail" ToRole="MenuDishTable" />
+        </EntityType>
+        <EntityType Name="HotelDiningDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="TotalTable" Type="Int32" />
+          <Property Name="TableCapacity" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TableAvailable" Type="Int32" />
+          <NavigationProperty Name="HotelDetail" Relationship="Self.FK__HotelDini__Hotel__76969D2E" FromRole="HotelDiningDetails" ToRole="HotelDetails" />
+        </EntityType>
+        <EntityType Name="HotelMenuTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="DishName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DishDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Isveg" Type="Int32" />
+          <Property Name="IsAvaulable" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK__HotelDini__Hotel__76969D2E">
+          <End Role="HotelDetails" Type="Self.HotelDetail" Multiplicity="0..1" />
+          <End Role="HotelDiningDetails" Type="Self.HotelDiningDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HotelDiningDetails">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bookmytableEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HotelDetails" EntityType="Self.HotelDetail" />
+          <EntitySet Name="HotelDiningDetails" EntityType="Self.HotelDiningDetail" />
+          <EntitySet Name="HotelMenuTables" EntityType="Self.HotelMenuTable" />
+          <AssociationSet Name="FK__HotelDini__Hotel__76969D2E" Association="Self.FK__HotelDini__Hotel__76969D2E">
+            <End Role="HotelDetails" EntitySet="HotelDetails" />
+            <End Role="HotelDiningDetails" EntitySet="HotelDiningDetails" />
+          </AssociationSet>
+          <FunctionImport Name="pSp_GetHotelDiningDetails" ReturnType="Collection(bookmytableModel.pSp_GetHotelDiningDetails_Result)">
+          <Parameter Name="HotelId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pSp_GetHotelMEnuDetails" ReturnType="Collection(bookmytableModel.pSp_GetHotelMEnuDetails_Result)">
+          <Parameter Name="HotelId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pSp_GetRestaurantsDetails" ReturnType="Collection(bookmytableModel.pSp_GetRestaurantsDetails_Result)">
+          <Parameter Name="Vch_IsActive" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddBookMyTableAndMenuOrder" ReturnType="Collection(bookmytableModel.AddBookMyTableAndMenuOrder_Result)">
+            <Parameter Name="p_intHotelId" Mode="In" Type="Int32" />
+            <Parameter Name="P_intTableBookingID" Mode="In" Type="Int32" />
+            <Parameter Name="P_intTotalQuantity" Mode="In" Type="Int32" />
+            <Parameter Name="P_dcmlTotalAmt" Mode="In" Type="Decimal" />
+            <Parameter Name="p_vchApprovalName" Mode="In" Type="String" />
+            <Parameter Name="p_vchCustomerName" Mode="In" Type="String" />
+            <Parameter Name="p_vchPhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="p_vchEmailID" Mode="In" Type="String" />
+            <Parameter Name="p_vchCity" Mode="In" Type="String" />
+            <Parameter Name="p_vchCountry" Mode="In" Type="String" />
+            <Parameter Name="p_vchAddress" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddsalesOrderItemTable">
+            <Parameter Name="p_intHotelId" Mode="In" Type="Int32" />
+            <Parameter Name="p_intMenuID" Mode="In" Type="Int32" />
+            <Parameter Name="P_intTableId" Mode="In" Type="Int32" />
+            <Parameter Name="P_dcmlTotalAmt" Mode="In" Type="Decimal" />
+            <Parameter Name="p_OrderId" Mode="In" Type="Int32" />
+            <Parameter Name="P_intQuantity" Mode="In" Type="Int32" />
+            <Parameter Name="p_vchDishName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetOrderDetails" ReturnType="Collection(bookmytableModel.Sp_GetOrderDetails_Result)">
+          <Parameter Name="OrderID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetOrderDetailsToEmployee" ReturnType="Collection(bookmytableModel.Sp_GetOrderDetailsToEmployee_Result)">
+            <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetUserAndUserRoleDetails" ReturnType="Collection(bookmytableModel.Sp_GetUserAndUserRoleDetails_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CustomerTables" EntityType="bookmytableModel.CustomerTable" />
+          <EntitySet Name="MenuDishTables" EntityType="bookmytableModel.MenuDishTable" />
+          <EntitySet Name="salesOrderItemTables" EntityType="bookmytableModel.salesOrderItemTable" />
+          <EntitySet Name="salesOrderTables" EntityType="bookmytableModel.salesOrderTable" />
+          <AssociationSet Name="FK__MenuDishT__Hotel__787EE5A0" Association="bookmytableModel.FK__MenuDishT__Hotel__787EE5A0">
+            <End Role="HotelDetail" EntitySet="HotelDetails" />
+            <End Role="MenuDishTable" EntitySet="MenuDishTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__salesOrde__Order__7F2BE32F" Association="bookmytableModel.FK__salesOrde__Order__7F2BE32F">
+            <End Role="salesOrderTable" EntitySet="salesOrderTables" />
+            <End Role="salesOrderItemTable" EntitySet="salesOrderItemTables" />
+          </AssociationSet>
+          <EntitySet Name="OrderMenuEntities" EntityType="bookmytableModel.OrderMenuEntity" />
+          <EntitySet Name="OrderPaymentDetails" EntityType="bookmytableModel.OrderPaymentDetail" />
+          <AssociationSet Name="FK__OrderPaym__Custo__440B1D61" Association="bookmytableModel.FK__OrderPaym__Custo__440B1D61">
+            <End Role="CustomerTable" EntitySet="CustomerTables" />
+            <End Role="OrderPaymentDetail" EntitySet="OrderPaymentDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="pSp_GetHotelDiningDetails_Result">
+          <Property Type="Int32" Name="HotelId" Nullable="true" />
+          <Property Type="Int32" Name="TotalTable" Nullable="true" />
+          <Property Type="Int32" Name="TableCapacity" Nullable="true" />
+          <Property Type="Int32" Name="TableAvailable" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DineID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pSp_GetHotelMEnuDetails_Result">
+          <Property Type="Int32" Name="HotelId" Nullable="true" />
+          <Property Type="String" Name="DishName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="DishDescription" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Isveg" Nullable="true" />
+          <Property Type="Int32" Name="IsAvailable" Nullable="true" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Discount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="MenuID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pSp_GetRestaurantsDetails_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="HotelName" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="ContactPersoneName" Nullable="true" MaxLength="350" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Rating" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="OpenintHours" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="AddBookMyTableAndMenuOrder_Result">
+          <Property Type="Int32" Name="CustomerID" Nullable="true" />
+          <Property Type="Int32" Name="OrderID" Nullable="true" />
+          <Property Type="Int32" Name="OrderPaymentID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetOrderDetails_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Int32" Name="HotelId" Nullable="true" />
+          <Property Type="Int32" Name="TableId" Nullable="true" />
+          <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+          <Property Type="Int32" Name="IsApproveStatus" Nullable="true" />
+          <Property Type="String" Name="ApprovalName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="Binary" Name="ts" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetOrderDetailsToEmployee_Result">
+          <Property Type="Int32" Name="HotelId" Nullable="true" />
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetUserAndUserRoleDetails_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="RoleDescription" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="UserType" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CustomerTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="OrderPaymentDetails" Relationship="bookmytableModel.FK__OrderPaym__Custo__440B1D61" FromRole="CustomerTable" ToRole="OrderPaymentDetail" />
+        </EntityType>
+        <EntityType Name="MenuDishTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="DishName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DishDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Isveg" Type="Int32" />
+          <Property Name="IsAvailable" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="HotelDetail" Relationship="bookmytableModel.FK__MenuDishT__Hotel__787EE5A0" FromRole="MenuDishTable" ToRole="HotelDetail" />
+        </EntityType>
+        <EntityType Name="salesOrderItemTable">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="TableId" Type="Int32" />
+          <Property Name="TotalQuantity" Type="Int32" />
+          <Property Name="IsApproveStatus" Type="Int32" />
+          <Property Name="ApprovalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="salesOrderTable" Relationship="bookmytableModel.FK__salesOrde__Order__7F2BE32F" FromRole="salesOrderItemTable" ToRole="salesOrderTable" />
+        </EntityType>
+        <EntityType Name="salesOrderTable">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="TableId" Type="Int32" />
+          <Property Name="TotalQuantity" Type="Int32" />
+          <Property Name="IsApproveStatus" Type="Int32" />
+          <Property Name="ApprovalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="salesOrderItemTable" Relationship="bookmytableModel.FK__salesOrde__Order__7F2BE32F" FromRole="salesOrderTable" ToRole="salesOrderItemTable" />
+        </EntityType>
+        <Association Name="FK__MenuDishT__Hotel__787EE5A0">
+          <End Type="bookmytableModel.HotelDetail" Role="HotelDetail" Multiplicity="0..1" />
+          <End Type="bookmytableModel.MenuDishTable" Role="MenuDishTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuDishTable">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__salesOrde__Order__7F2BE32F">
+          <End Type="bookmytableModel.salesOrderTable" Role="salesOrderTable" Multiplicity="1" />
+          <End Type="bookmytableModel.salesOrderItemTable" Role="salesOrderItemTable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="salesOrderTable">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="salesOrderItemTable">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderMenuEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="HotelId" Type="Int32" />
+          <Property Name="DishId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="DishName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DishAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="OrderPaymentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustOrderId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="PaymentTypeID" Type="Int32" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="CustomerTable" Relationship="bookmytableModel.FK__OrderPaym__Custo__440B1D61" FromRole="OrderPaymentDetail" ToRole="CustomerTable" />
+        </EntityType>
+        <Association Name="FK__OrderPaym__Custo__440B1D61">
+          <End Type="bookmytableModel.CustomerTable" Role="CustomerTable" Multiplicity="0..1" />
+          <End Type="bookmytableModel.OrderPaymentDetail" Role="OrderPaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPaymentDetail">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bookmytableModelStoreContainer" CdmEntityContainer="bookmytableEntities">
+          <EntitySetMapping Name="HotelDetails">
+            <EntityTypeMapping TypeName="bookmytableModel.HotelDetail">
+              <MappingFragment StoreEntitySet="HotelDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="ContactPersoneName" ColumnName="ContactPersoneName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="OpenintHours" ColumnName="OpenintHours" />
+                <ScalarProperty Name="HotelType" ColumnName="HotelType" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelDiningDetails">
+            <EntityTypeMapping TypeName="bookmytableModel.HotelDiningDetail">
+              <MappingFragment StoreEntitySet="HotelDiningDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="TotalTable" ColumnName="TotalTable" />
+                <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="TableAvailable" ColumnName="TableAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelMenuTables">
+            <EntityTypeMapping TypeName="bookmytableModel.HotelMenuTable">
+              <MappingFragment StoreEntitySet="HotelMenuTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishDescription" ColumnName="DishDescription" />
+                <ScalarProperty Name="Isveg" ColumnName="Isveg" />
+                <ScalarProperty Name="IsAvaulable" ColumnName="IsAvaulable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pSp_GetHotelDiningDetails" FunctionName="bookmytableModel.Store.pSp_GetHotelDiningDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.pSp_GetHotelDiningDetails_Result">
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="TotalTable" ColumnName="TotalTable" />
+                <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+                <ScalarProperty Name="TableAvailable" ColumnName="TableAvailable" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DineID" ColumnName="DineID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pSp_GetHotelMEnuDetails" FunctionName="bookmytableModel.Store.pSp_GetHotelMEnuDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.pSp_GetHotelMEnuDetails_Result">
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishDescription" ColumnName="DishDescription" />
+                <ScalarProperty Name="Isveg" ColumnName="Isveg" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pSp_GetRestaurantsDetails" FunctionName="bookmytableModel.Store.pSp_GetRestaurantsDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.pSp_GetRestaurantsDetails_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="ContactPersoneName" ColumnName="ContactPersoneName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="OpenintHours" ColumnName="OpenintHours" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddBookMyTableAndMenuOrder" FunctionName="bookmytableModel.Store.AddBookMyTableAndMenuOrder">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.AddBookMyTableAndMenuOrder_Result">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderPaymentID" ColumnName="OrderPaymentID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddsalesOrderItemTable" FunctionName="bookmytableModel.Store.AddsalesOrderItemTable" />
+          <FunctionImportMapping FunctionImportName="Sp_GetOrderDetails" FunctionName="bookmytableModel.Store.Sp_GetOrderDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.Sp_GetOrderDetails_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="IsApproveStatus" ColumnName="IsApproveStatus" />
+                <ScalarProperty Name="ApprovalName" ColumnName="ApprovalName" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_GetOrderDetailsToEmployee" FunctionName="bookmytableModel.Store.Sp_GetOrderDetailsToEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.Sp_GetOrderDetailsToEmployee_Result">
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_GetUserAndUserRoleDetails" FunctionName="bookmytableModel.Store.Sp_GetUserAndUserRoleDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookmytableModel.Sp_GetUserAndUserRoleDetails_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CustomerTables">
+            <EntityTypeMapping TypeName="bookmytableModel.CustomerTable">
+              <MappingFragment StoreEntitySet="CustomerTable">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuDishTables">
+            <EntityTypeMapping TypeName="bookmytableModel.MenuDishTable">
+              <MappingFragment StoreEntitySet="MenuDishTable">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Isveg" ColumnName="Isveg" />
+                <ScalarProperty Name="DishDescription" ColumnName="DishDescription" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salesOrderItemTables">
+            <EntityTypeMapping TypeName="bookmytableModel.salesOrderItemTable">
+              <MappingFragment StoreEntitySet="salesOrderItemTable">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="ApprovalName" ColumnName="ApprovalName" />
+                <ScalarProperty Name="IsApproveStatus" ColumnName="IsApproveStatus" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salesOrderTables">
+            <EntityTypeMapping TypeName="bookmytableModel.salesOrderTable">
+              <MappingFragment StoreEntitySet="salesOrderTable">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="ApprovalName" ColumnName="ApprovalName" />
+                <ScalarProperty Name="IsApproveStatus" ColumnName="IsApproveStatus" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMenuEntities">
+            <EntityTypeMapping TypeName="bookmytableModel.OrderMenuEntity">
+              <MappingFragment StoreEntitySet="OrderMenuEntity">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPaymentDetails">
+            <EntityTypeMapping TypeName="bookmytableModel.OrderPaymentDetail">
+              <MappingFragment StoreEntitySet="OrderPaymentDetails">
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustOrderId" ColumnName="CustOrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

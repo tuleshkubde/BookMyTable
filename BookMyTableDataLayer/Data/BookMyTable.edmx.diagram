@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90af76ec83b44d9493058586c906ae4b" Name="Diagram1">
+        <EntityTypeShape EntityType="bookmytableModel.HotelDetail" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bookmytableModel.HotelDiningDetail" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bookmytableModel.HotelMenuTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="bookmytableModel.FK__HotelDini__Hotel__76969D2E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bookmytableModel.CustomerTable" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="bookmytableModel.MenuDishTable" Width="1.5" PointX="3.375" PointY="10.375" />
+        <EntityTypeShape EntityType="bookmytableModel.salesOrderItemTable" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="bookmytableModel.salesOrderTable" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="bookmytableModel.FK__MenuDishT__Hotel__787EE5A0" />
+        <AssociationConnector Association="bookmytableModel.FK__salesOrde__Order__7F2BE32F" />
+        <EntityTypeShape EntityType="bookmytableModel.OrderMenuEntity" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="bookmytableModel.OrderPaymentDetail" Width="1.5" PointX="8" PointY="5" />
+        <AssociationConnector Association="bookmytableModel.FK__OrderPaym__Custo__440B1D61" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
